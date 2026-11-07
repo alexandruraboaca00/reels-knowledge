@@ -1,0 +1,15 @@
+{
+  "vision_model": "qwen3-vl:4b",
+  "text_model": "qwen3:4b",
+  "whisper_model": "turbo",
+  "web_search": true,
+  "frames": {
+    "mode": "hybrid",
+    "interval_seconds": 1.0,
+    "scene_threshold": 8.0,
+    "min_gap_seconds": 0.18,
+    "remove_exact_duplicates": true,
+    "fixed_frames": 10
+  },
+  "whisper_device": "auto"
+}

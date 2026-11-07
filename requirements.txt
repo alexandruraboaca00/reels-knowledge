@@ -1,0 +1,7 @@
+faster-whisper
+av==18.1.0
+ollama
+gallery-dl
+yt-dlp
+ddgs
+requests

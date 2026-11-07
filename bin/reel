@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd -- "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/.." && pwd)"
+PYTHON="${ROOT}/.venv/bin/python"
+
+if [[ ! -x "${PYTHON}" ]]; then
+  echo "Falta .venv. Ejecuta scripts/install.sh cpu o nvidia." >&2
+  exit 1
+fi
+
+# Expone a CTranslate2 las librerías CUDA/cuDNN instaladas dentro del venv.
+NVIDIA_LIBS="$("${PYTHON}" - <<'PY'
+from pathlib import Path
+import site
+
+libs = []
+for base in map(Path, site.getsitepackages()):
+    for rel in ("nvidia/cublas/lib", "nvidia/cudnn/lib"):
+        p = base / rel
+        if p.exists():
+            libs.append(str(p))
+print(":".join(libs))
+PY
+)"
+
+if [[ -n "${NVIDIA_LIBS}" ]]; then
+  export LD_LIBRARY_PATH="${NVIDIA_LIBS}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+fi
+
+exec "${PYTHON}" "${ROOT}/app/reel.py" "$@"
