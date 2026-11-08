@@ -27,3 +27,12 @@ El instalador anterior asumía `~/Projects/reels-knowledge` y su desinstalador
 borraba todo el proyecto. Esos comportamientos se sustituyen para proteger datos.
 La configuración local histórica fue retirada del índice durante la preparación,
 pero permanece en el commit inicial hasta una decisión autorizada sobre el historial.
+
+## Preparación por familia Linux
+
+`install-linux.sh` y los wrappers Debian/Fedora/Arch/openSUSE delegan en
+`install_linux.py`. Con `--system` instalan requisitos mediante sudo; con
+`--install-uv` pueden añadir uv 0.12.17 en `~/.local/bin` si falta. El modo
+`--dry-run` solo muestra el plan. No instalan drivers, servicios Ollama, modelos
+ni repositorios adicionales. Esos paquetes y uv se conservan al desinstalar.
+Consulta docs/LINUX.md para alcance y comandos.

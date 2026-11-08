@@ -7,9 +7,27 @@ Procesamiento con Faster-Whisper y Ollama en tu equipo; SQLite evita repetir tra
 ## Inicio rápido en Linux
 
 Requiere Bash, Python 3.12 mediante uv, FFmpeg/ffprobe y Ollama ≥0.12.7 para Qwen3-VL.
-Arch Linux es la plataforma objetivo. Windows y macOS no están validados.
+Hay scripts para Debian/Ubuntu/Mint, Fedora, Arch/Manjaro y openSUSE.
+Consulta [Instalación Linux](docs/LINUX.md) para detección automática, simulación
+y restricciones. No se han validado instalaciones completas en cada distro;
+Windows y macOS no están validados.
 
-Desde una copia local del proyecto, en cualquier directorio:
+Cada familia instala los requisitos del sistema con su **gestor de paquetes nativo**:
+
+| Distribución | Gestor | Script específico |
+|---|---|---|
+| Debian, Ubuntu, Linux Mint | `apt-get` | `scripts/install-debian.sh` |
+| Fedora | `dnf` | `scripts/install-fedora.sh` |
+| Arch, Manjaro, EndeavourOS | `pacman` | `scripts/install-arch.sh` |
+| openSUSE | `zypper` | `scripts/install-opensuse.sh` |
+
+`pacman` solo se usa en Arch y derivados. En todas las familias, las dependencias
+Python se instalan con **uv dentro de `.venv`**, sin pip global ni `sudo pip`.
+El instalador común detecta la distribución; `--system` habilita los paquetes del
+sistema con sudo y `--install-uv` instala uv como usuario si falta. Ollama, sus
+modelos y los drivers se preparan por separado.
+
+Ejemplo específico para Arch, desde una copia local del proyecto:
 
 ```bash
 # Arch: instala los requisitos del sistema si faltan
@@ -28,6 +46,13 @@ reel "https://www.youtube.com/watch?v=ID_DEL_VIDEO"
 Inicia el servidor Ollama según su instalación. Para NVIDIA descarga los modelos
 `qwen3-vl:4b` y `qwen3:4b`. El instalador conserva una configuración existente;
 comprueba sus modelos antes de descargarlos. Detalles en [Instalación](docs/INSTALLATION.md).
+
+Para otras distribuciones, revisa primero el plan y después ejecútalo:
+
+```bash
+bash scripts/install-linux.sh cpu --system --install-uv --dry-run
+bash scripts/install-linux.sh cpu --system --install-uv
+```
 
 ## Comandos
 

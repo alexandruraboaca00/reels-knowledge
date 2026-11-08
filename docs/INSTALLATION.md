@@ -11,6 +11,18 @@ FFmpeg debe incluir `scdet`; la prueba sintética usa `drawtext` y fuentes.
 FFmpeg del sistema se utiliza incluso aunque PyAV incluya sus propias bibliotecas.
 Ollama ≥0.12.7 es el mínimo indicado por su catálogo para Qwen3-VL.
 
+## Otras distribuciones Linux
+
+Consulta [LINUX.md](LINUX.md): scripts Debian/Ubuntu/Mint, Fedora, Arch/Manjaro y
+openSUSE, detección automática y `--dry-run`. La preparación por distribución
+delega en el mismo instalador aislado; las instalaciones completas por distro
+siguen pendientes de validación real.
+
+Los gestores nativos son `apt-get` para Debian/Ubuntu/Mint, `dnf` para Fedora,
+`pacman` para Arch/Manjaro y `zypper` para openSUSE. Solo los requisitos del sistema
+usan esos gestores; las dependencias Python usan uv dentro de `.venv` en todas
+las distribuciones, sin pip global ni `sudo pip`.
+
 ## Arch Linux
 
 ```bash
